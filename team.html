@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>XcelProf - Online Education Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>connect@xcelprofs.com</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase"><span class="text-success">X</span><span
+                        class="text-dark">CEL</span><span class="text-success">P</span><span
+                        class="text-dark">ROF</span></h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end px-lg-3" id="navbarCollapse">
+                <div class="d-flex align-items-center ml-auto">
+
+                    <!-- MENU DROPDOWN BUTTON WITH ANIMATION -->
+                    <div class="dropdown mr-3">
+                        <button class="btn btn-dark menu-animate px-4 py-2" type="button" id="mainMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="menu-icon">&#9776;</span> Menu
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right animate__animated animate__fadeIn"
+                            aria-labelledby="mainMenuButton">
+                            <a href="index.html" class="dropdown-item">Home</a>
+                            <a href="about.html" class="dropdown-item">About</a>
+
+                            <a href="team.html" class="dropdown-item">Instructors</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+
+                            <a href="contact.html" class="dropdown-item">Contact</a>
+                        </div>
+                    </div>
+
+                    <!-- BECOME A TUTOR BUTTON WITH ATTRACTIVE ANIMATED BORDER -->
+                    <a href="feature.html" class="btn btn-primary become-tutor-btn position-relative px-4 py-2 ml-2">
+                        Become a Tutor
+                        <span class="border-animate"></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Animation CSS -->
+            <style>
+                /* Slide-in animation for menu button */
+                .menu-animate {
+                    background: #fff;
+                    color: #333;
+                    border-radius: 25px;
+                    font-weight: bold;
+                    position: relative;
+                    transition: box-shadow 0.3s, color 0.3s;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+                    overflow: hidden;
+                }
+
+                .menu-animate:hover,
+                .menu-animate:focus {
+                    color: #fff;
+                    background: #2878eb;
+                    box-shadow: 0 2px 10px #2878eb44;
+                    outline: none;
+                }
+
+                /* Animated lines for Become a Tutor button */
+                .become-tutor-btn {
+                    font-weight: bold;
+                    border-radius: 25px;
+                    overflow: hidden;
+                }
+
+                .become-tutor-btn .border-animate {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: 3px solid #fff;
+                    border-radius: 25px;
+                    pointer-events: none;
+                    z-index: 1;
+                    animation: border-move 2s infinite linear;
+                }
+
+                @keyframes border-move {
+                    0% {
+                        box-shadow: 0 0 0 0 #fd9800;
+                        border-color: #fff;
+                    }
+
+                    15% {
+                        box-shadow: 0 0 8px 4px #fd9800aa;
+                        border-color: #fd9800;
+                    }
+
+                    85% {
+                        box-shadow: 0 0 8px 4px #fd9800aa;
+                        border-color: #fd9800;
+                    }
+
+                    100% {
+                        box-shadow: 0 0 0 0 #fd9800;
+                        border-color: #fff;
+                    }
+                }
+
+                .become-tutor-btn:hover .border-animate {
+                    animation-play-state: paused;
+                    border-color: #fd9800;
+                    box-shadow: 0 0 18px 8px #fd9800aa;
+                }
+
+                .menu-icon {
+                    font-size: 1.3em;
+                    margin-right: 6px;
+                    animation: menu-bounce 1.2s infinite alternate;
+                }
+
+                @keyframes menu-bounce {
+                    0% {
+                        transform: scale(1);
+                        color: #2878eb;
+                    }
+
+                    100% {
+                        transform: scale(1.16) rotate(-6deg);
+                        color: #fd9800;
+                    }
+                }
+            </style>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-1">Instructors</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Instructors</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Team Start -->
+
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative mb-5">
+                <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Instructors</h6>
+                <h1 class="display-4">Meet Our Instructors</h1>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                <!-- Instructor Card -->
+                <div class="col">
+                    <div class="team-item card border-0 shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&h=600&fit=crop"
+                            class="card-img-top instructor-img" alt="Emily Johnson">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-1">Emily Johnson</h5>
+                            <p class="card-text">Web Design & Development</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructor Card -->
+                <div class="col">
+                    <div class="team-item card border-0 shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=800&h=600&fit=crop"
+                            class="card-img-top instructor-img" alt="David Wilson">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-1">David Wilson</h5>
+                            <p class="card-text">Machine Learning & AI</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="team-item card border-0 shadow-sm">
+                        <img src="img/tutor6.jpeg" class="card-img-top instructor-img" alt="Anne Smith">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-1">Neil Raghavan</h5>
+                            <p class="card-text">Machine Learning & AI</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- More Cards -->
+                <div class="col">
+                    <div class="team-item card border-0 shadow-sm">
+                        <img src="img/tutor2.jpeg" class="card-img-top instructor-img" alt="Anne Smith">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-1">Anne Smith</h5>
+                            <p class="card-text">Chemistry</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col">
+                    <div class="team-item card border-0 shadow-sm">
+                        <img src="img/tutor7.jpeg" class="card-img-top instructor-img" alt="Anne Smith">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-1">Aryan Scott</h5>
+                            <p class="card-text">Machine Learning & AI</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="team-item card border-0 shadow-sm">
+                        <img src="img/team-4.jpeg" class="card-img-top instructor-img" alt="Jason Martinez">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-1">Jason Martinez</h5>
+                            <p class="card-text">Maths</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="team-item card border-0 shadow-sm text-center d-flex flex-column justify-content-center align-items-center p-4"
+                    style="background: linear-gradient(135deg, #fefefe, #f0f8ff); border: 2px dashed #2878eb; height: 100%; position: relative; overflow: hidden;">
+                    <div class="card-body">
+                        <div style="font-size: 3rem; color: #2878eb;" class="mb-2">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h5 class="card-title mb-2 text-primary font-weight-bold">+ Many More Tutors</h5>
+                        <p class="card-text text-muted">We've got an amazing lineup of expert tutors — we just can't fit
+                            them all here!</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+    <!-- Team End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>XcelProf</h1>
+                    </a>
+                    <p class="m-0">At XcelProf, our mission is to make personalized education accessible and affordable
+                        for students worldwide. We connect school and college students with over 190+ expert-vetted
+                        tutors across 100+ subjects, including coding, math, science, language learning, and more. Our
+                        highly qualified tutors are passionate about helping students succeed, ensuring a top-quality
+                        learning experience. With a focus on personalized education, we empower students to find the
+                        right tutor that matches their unique learning style. Join XcelProf today and unlock your
+                        potential with the support of our dedicated tutoring network, committed to your academic
+                        success!</p>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-white mb-4">Newsletter</h3>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light" style="padding: 30px;"
+                                placeholder="Your Email Address">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-4">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Get In Touch</h3>
+
+
+                    <p><i class="fa fa-envelope mr-2"></i>connect@xcelprofs.com</p>
+                    <div class="d-flex justify-content-start mt-4">
+
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-facebook-f"></i></a>
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-linkedin-in"></i></a>
+                        <a class="text-white" href="#"><i class="fab fa-2x fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Subject Category</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Web Design</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Apps Design</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Marketing</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Research</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>SEO</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Privacy Policy</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Terms &
+                            Condition</a>
+
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help & Support</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white-50 border-top py-4"
+        style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0">Copyright &copy; <a class="text-white" href="#">XcelProf</a>. All Rights Reserved.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
+            class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

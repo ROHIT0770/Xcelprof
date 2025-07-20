@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Referral Form | XcelProf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        p.description {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 0 15px rgba(0, 114, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .success-message {
+            display: none;
+            color: green;
+            font-weight: 500;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>🎁 Refer & Earn</h2>
+        <p class="description">Fill in the details below and earn ₹50 when your referral completes their first class!
+        </p>
+
+        <form id="referralForm">
+            <label>🆔 Enter Your Unique ID *</label>
+            <p class="note">✨<strong>First 3 letters</strong> of your name & <strong>last 2
+                    digits</strong> of your phone number<br>
+                Example: ROHIT+1234567841 → <strong>ROH41</strong></p>
+            <input type="text" name="uniqueId" placeholder="e.g. ROH41" required>
+
+            <label>👤 Reference Name *</label>
+            <input type="text" name="refName" placeholder="Full name of the tutor" required>
+
+            <label>📱 Reference Phone Number *</label>
+            <input type="tel" name="refPhone" placeholder="e.g. 9876543210" required>
+
+            <label>📧 Reference Email ID *</label>
+            <input type="email" name="refEmail" placeholder="e.g. tutor@example.com" required>
+
+            <label>📚 Subjects They Teach *</label>
+            <input type="text" name="refSubjects" placeholder="e.g. Math, Physics, Chemistry" required>
+
+            <label>💸 Your UPI ID (to receive reward)</label>
+            <input type="text" name="upiId" placeholder="e.g. yourname@upi" required>
+
+            <button type="submit" class="submit-btn">🚀 Submit Referral</button>
+            <p class="success-message" id="successMsg">✅ Referral submitted successfully!</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('referralForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const successMsg = document.getElementById('successMsg');
+
+            // Gather form data
+            const formData = {
+                uniqueId: form.uniqueId.value.trim(),
+                refName: form.refName.value.trim(),
+                refPhone: form.refPhone.value.trim(),
+                refEmail: form.refEmail.value.trim(),
+                refSubjects: form.refSubjects.value.trim(),
+                upiId: form.upiId.value.trim()
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbxa_UDK5Q2kGKr54-6aFw5PClAdNMkKj6igkva29cfErQ1bn5UWN4BRZxlirm5YcBDtfw/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uniqueId: "TEST01",
+                    refName: "John Doe",
+                    refPhone: "9876543210",
+                    refEmail: "john@example.com",
+                    refSubjects: "Math, Physics",
+                    upiId: "johndoe@upi"
+                })
+            })
+                .then(res => res.json())
+                .then(console.log)
+                .catch(console.error);
+
+        });
+    </script>
+
+
+</body>
+
+</html>

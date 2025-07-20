@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XcelProf - Online Tutoring Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Header Styles */
+        .header {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-green {
+            color: #7ED321;
+            /* Bright green color matching the image */
+        }
+
+        .logo-black {
+            color: #2C2C2C;
+            /* Dark black/gray color */
+        }
+
+        .logo:hover {
+            text-decoration: none;
+        }
+
+        .logo:hover .logo-green {
+            color: #6BB81A;
+            /* Slightly darker green on hover */
+        }
+
+        .logo:hover .logo-black {
+            color: #1A1A1A;
+            /* Slightly darker black on hover */
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-text {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .start-tutoring-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .start-tutoring-btn:hover {
+            background: #34495e;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-left {
+            max-width: 600px;
+        }
+
+        .join-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .earn-text {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .amount {
+            font-size: 72px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .currency-symbol {
+            font-size: 60px;
+        }
+
+        .hours-info {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .help-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .help-text {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .help-link {
+            color: #333;
+            text-decoration: underline;
+            font-size: 16px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 60px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #333;
+            width: 30%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Right Side Image */
+        .content-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tutor-image {
+            width: 400px;
+            height: 400px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .nav-item:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-item.active {
+            border-bottom: 3px solid #333;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            color: #666;
+        }
+
+        .nav-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .nav-item.active .nav-label {
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: white;
+            padding: 60px 0;
+            margin-top: 40px;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            padding: 0 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .stat-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Earn Section */
+        .earn-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .earn-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .earn-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .earn-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .earn-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .feature-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-content h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-content p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Network Section */
+        .network-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .network-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .network-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 60px;
+        }
+
+        .network-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tutor-circles {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .tutor-circle {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tutor-1 {
+            top: 20%;
+            left: 10%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .tutor-2 {
+            top: 10%;
+            left: 25%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .tutor-3 {
+            top: 30%;
+            left: 5%;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .tutor-4 {
+            top: 45%;
+            left: 15%;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .tutor-5 {
+            top: 60%;
+            left: 8%;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .tutor-6 {
+            top: 75%;
+            left: 20%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .tutor-7 {
+            top: 85%;
+            left: 35%;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .tutor-8 {
+            top: 15%;
+            right: 25%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tutor-9 {
+            top: 5%;
+            right: 10%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .tutor-10 {
+            top: 35%;
+            right: 5%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .tutor-11 {
+            top: 50%;
+            right: 15%;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .tutor-12 {
+            top: 65%;
+            right: 8%;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .tutor-13 {
+            top: 80%;
+            right: 20%;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .tutor-14 {
+            top: 90%;
+            right: 35%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .tutor-15 {
+            top: 25%;
+            left: 30%;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .tutor-16 {
+            top: 40%;
+            right: 30%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tutor-17 {
+            top: 55%;
+            left: 35%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .tutor-18 {
+            top: 70%;
+            right: 40%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .tutor-19 {
+            top: 10%;
+            left: 45%;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .tutor-20 {
+            top: 90%;
+            left: 50%;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .phone-mockup {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .phone-frame {
+            width: 280px;
+            height: 500px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 35px;
+            padding: 4px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            position: relative;
+            border: 2px solid #333;
+        }
+
+        .phone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #000;
+            position: relative;
+        }
+
+        .phone-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .phone-content {
+            background: white;
+            border-radius: 25px 25px 0 0;
+            height: calc(100% - 60px);
+            padding: 25px 20px;
+            margin-top: 10px;
+        }
+
+        .phone-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .signal-bars {
+            display: flex;
+            gap: 2px;
+            align-items: flex-end;
+        }
+
+        .bar {
+            width: 3px;
+            background: white;
+            border-radius: 1px;
+        }
+
+        .bar:nth-child(1) {
+            height: 4px;
+        }
+
+        .bar:nth-child(2) {
+            height: 6px;
+        }
+
+        .bar:nth-child(3) {
+            height: 8px;
+        }
+
+        .bar:nth-child(4) {
+            height: 10px;
+        }
+
+        .tutor-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tutor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tutor-info h4 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .tutor-info p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .tutor-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat {
+            flex: 1;
+        }
+
+        .stat-num {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Steps Section */
+        .animated-line-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .line-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .animated-line {
+            position: relative;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .line-glow {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+            animation: lineFlow 2s infinite;
+        }
+
+        .arrow-container {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: arrowPulse 2s infinite;
+        }
+
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid #667eea;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        @keyframes lineFlow {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes arrowPulse {
+
+            0%,
+            100% {
+                transform: translateY(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateY(-50%) scale(1.2);
+            }
+        }
+
+        .steps-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .steps-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .steps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            position: relative;
+        }
+
+        .step-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .step-item:hover::before {
+            opacity: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+
+        .step-number::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            transform: rotate(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .step-item:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .step-item:hover .step-number::before {
+            transform: rotate(-45deg) translateX(100%);
+        }
+
+        .step-number:nth-child(1) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .step-item:nth-child(2) .step-number {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .step-item:nth-child(3) .step-number {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .step-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .step-item:hover .step-content {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-content h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .step-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .step-content p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        /* Connection lines between steps */
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 16.66%;
+            right: 16.66%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 20%, rgba(255, 255, 255, 0.3) 80%, transparent 100%);
+            z-index: 1;
+        }
+
+        .steps-container::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 16.66%;
+            right: 16.66%;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.6) 100%);
+            z-index: 1;
+            animation: flow 3s infinite;
+        }
+
+        @keyframes flow {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .join-title,
+            .earn-text {
+                font-size: 36px;
+            }
+
+            .amount {
+                font-size: 48px;
+            }
+
+            .tutor-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .nav-items {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .nav-item {
+                flex: 1;
+                min-width: 80px;
+            }
+
+            .stats-container,
+            .earn-features,
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .network-title,
+            .earn-title {
+                font-size: 32px;
+            }
+
+            .network-visual {
+                height: 400px;
+            }
+
+            .phone-frame {
+                width: 220px;
+                height: 400px;
+            }
+
+            .tutor-circle {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-green">X</span><span class="logo-black">CEL</span><span
+                    class="logo-green">P</span><span class="logo-black">ROF</span>
+            </a>
+
+            <div class="nav-right">
+                <span class="nav-text">Ready to become a tutor?</span>
+                <a href="https://forms.gle/KJdGP4o9hveLZvUe7" target="_blank" style="text-decoration: none;">
+                    <button class="start-tutoring-btn">
+                        <span>📚</span>
+                        Start tutoring
+                    </button>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-left">
+            <h1 class="join-title">Join XcelProf</h1>
+            <h2 class="earn-text">You could earn Upto</h2>
+            <div class="amount">
+                <span class="currency-symbol">₹</span>1,00,000
+                <span style="font-size: 0.56em; font-weight: normal;">/month</span>
+            </div>
+            <p class="hours-info" style="text-align: left; margin-left: 50px;">Get paid on hourly basis</p>
+
+            <div class="help-section">
+                <span class="help-text">Need any help?</span>
+                <a href="#" class="help-link">Help Center</a>
+            </div>
+
+
+        </div>
+
+        <div class="content-right">
+            <img src="img/tutor-m.jpg" alt="Tutor" class="tutor-image">
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-items">
+            <div class="nav-item active">
+                <div class="nav-icon">✨</div>
+                <div class="nav-label">Popular</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🎵</div>
+                <div class="nav-label">Singing</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">±</div>
+                <div class="nav-label">Math</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">ES</div>
+                <div class="nav-label">Spanish</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🎸</div>
+                <div class="nav-label">Guitar</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🎹</div>
+                <div class="nav-label">Piano</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🗣️</div>
+                <div class="nav-label">French</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">⚡</div>
+                <div class="nav-label">Physics</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🧪</div>
+                <div class="nav-label">Chemistry</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🧬</div>
+                <div class="nav-label">Biology</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">EN</div>
+                <div class="nav-label">ESL</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">→</div>
+                <div class="nav-label"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Tutors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🎓</div>
+                <div class="stat-number">1.5K+</div>
+                <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">📚</div>
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Subjects</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Earn Section -->
+    <section class="earn-section">
+        <div class="earn-container">
+            <h2 class="earn-title">Earn with XcelProf</h2>
+            <p class="earn-subtitle">Earn a base fee + incentives</p>
+
+            <div class="earn-features">
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-content">
+                        <h3>Get paid per lesson</h3>
+                        <p>Every lesson is 50 minutes of teaching time</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💳</div>
+                    <div class="feature-content">
+                        <h3>Base fee</h3>
+                        <p>Your Base fee increases as you complete more lessons</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-content">
+                        <h3>Incentives</h3>
+                        <p>Get incentives and night allowances to boost your income.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Network Section -->
+    <section class="network-section">
+        <div class="network-container">
+            <h2 class="network-title">Connect, teach, and grow with a global tutor community</h2>
+
+            <div class="network-visual">
+                <div class="tutor-circles">
+                    <div class="tutor-circle tutor-1"></div>
+                    <div class="tutor-circle tutor-2"></div>
+                    <div class="tutor-circle tutor-3"></div>
+                    <div class="tutor-circle tutor-4"></div>
+                    <div class="tutor-circle tutor-5"></div>
+                    <div class="tutor-circle tutor-6"></div>
+                    <div class="tutor-circle tutor-7"></div>
+                    <div class="tutor-circle tutor-8"></div>
+                    <div class="tutor-circle tutor-9"></div>
+                    <div class="tutor-circle tutor-10"></div>
+                    <div class="tutor-circle tutor-11"></div>
+                    <div class="tutor-circle tutor-12"></div>
+                    <div class="tutor-circle tutor-13"></div>
+                    <div class="tutor-circle tutor-14"></div>
+                    <div class="tutor-circle tutor-15"></div>
+                    <div class="tutor-circle tutor-16"></div>
+                    <div class="tutor-circle tutor-17"></div>
+                    <div class="tutor-circle tutor-18"></div>
+                    <div class="tutor-circle tutor-19"></div>
+                    <div class="tutor-circle tutor-20"></div>
+                </div>
+
+                <div class="phone-mockup"
+                    style="width: 300px; border-radius: 35px; overflow: hidden; box-shadow: 0 5px 30px rgba(0,0,0,0.2); border: 6px solid #2d2d2d; background-color: white; font-family: sans-serif;">
+                    <div class="phone-header"
+                        style="background-color: white; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee;">
+                        <div class="phone-time" style="font-size: 14px; font-weight: bold;">09:30 PM</div>
+                        <div class="phone-status" style="font-size: 14px;">
+                            <span style="margin-right: 4px;">📶</span>
+                            <span style="margin-right: 4px;">📳</span>
+                            <span>🔋</span>
+                        </div>
+                    </div>
+                    <div class="tutor-image"
+                        style="width: 100%; height: 320px; background-image: url('img/team-3.jpg'); background-size: cover; background-position: center;">
+                    </div>
+
+                    <div class="tutor-info" style="padding: 20px 15px 10px;">
+                        <h4 style="margin: 0; font-size: 18px; font-weight: 600;">Xcelprof tutor</h4>
+                        <p style="margin: 5px 0 0; font-size: 14px; color: #555;">English tutor<br>Bachelor’s Degree (3
+                            years)</p>
+                    </div>
+
+                    <div class="tutor-stats" style="display: flex; justify-content: space-around; padding: 15px 10px;">
+                        <div class="stat-box" style="text-align: center;">
+                            <div style="font-weight: bold; font-size: 16px;">4.5 ★★★★★</div>
+                            <div style="font-size: 12px; color: #666;">Rating</div>
+                        </div>
+                        <div class="stat-box" style="text-align: center;">
+                            <div style="font-weight: bold; font-size: 16px;">Supertutor</div>
+                            <div style="font-size: 12px; color: #666;">Level</div>
+                        </div>
+                        <div class="stat-box" style="text-align: center;">
+                            <div style="font-weight: bold; font-size: 16px;">95</div>
+                            <div style="font-size: 12px; color: #666;">Reviews</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="steps-section">
+        <div class="steps-container">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Sign Up</h3>
+                    <p>Click on "Start Tutoring"</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Get Approved</h3>
+                    <p>by our team in 2-3 working days</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Onboard & start earning</h3>
+                    <p>by teaching students all over the World!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add interactive functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate progress bar on page load
+            setTimeout(() => {
+                const progressBar = document.querySelector('.progress-bar');
+                progressBar.style.width = '30%';
+            }, 500);
+
+            // Add click functionality to navigation items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                });
+            });
+
+            // Add hover effect to start tutoring button
+            const startBtn = document.querySelector('.start-tutoring-btn');
+            startBtn.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 4px 12px rgba(44, 62, 80, 0.3)';
+            });
+
+            startBtn.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+
+            // Add click functionality to help link
+            const helpLink = document.querySelector('.help-link');
+            helpLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                alert('Please drop an email on connect@xcelprofs.com. Our team will get back to you within 2 mins');
+            });
+
+            // Add click functionality to start tutoring button
+            startBtn.addEventListener('click', function () {
+                alert('Lets Make Learning Awesome Together!');
+            });
+
+            // Animate stats on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.stat-item, .feature-item, .step-item').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+
+</html>

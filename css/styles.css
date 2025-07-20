@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: white;
+    color: #1a1a1a;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.start-btn {
+    padding: 10px 20px;
+    background-color: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 40px;
+    flex-wrap: wrap;
+}
+
+.info {
+    max-width: 500px;
+}
+
+.highlight {
+    color: #2a4dd0;
+}
+
+.earn-text {
+    font-size: 32px;
+    margin-top: 10px;
+}
+
+.salary {
+    font-size: 64px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.details {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.logo-green {
+    color: #7ED321; /* Bright green color matching the image */
+}
+
+.logo-black {
+    color: #2C2C2C; /* Dark black/gray color */
+}
+
+.logo:hover {
+    text-decoration: none;
+}
+
+.logo:hover .logo-green {
+    color: #6BB81A; /* Slightly darker green on hover */
+}
+
+.logo:hover .logo-black {
+    color: #1A1A1A; /* Slightly darker black on hover */
+}
+.help {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.help a {
+    color: #1a1a1a;
+    text-decoration: underline;
+}
+
+.slider {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.image-section img {
+    width: 300px;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.footer {
+    padding: 20px 40px;
+    border-top: 1px solid #eee;
+}
+
+.subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.subject {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s;
+}
+
+.subject:hover {
+    background-color: #e6e6e6;
+}

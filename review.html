@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews and Ratings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .avatars-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 8px;
+        }
+
+        .avatar-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .rating-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 80px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .overall-rating {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .rating-number {
+            font-size: 64px;
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .stars-display {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .star {
+            color: #ffc107;
+            font-size: 24px;
+        }
+
+        .rating-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .view-detailed-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .view-detailed-link:hover {
+            text-decoration: underline;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 40px;
+            max-width: 600px;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .metric-icon {
+            font-size: 24px;
+        }
+
+        .reviews-container {
+            margin-top: 50px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .review-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .review-card:hover {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .reviewer-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .reviewer-info {
+            flex: 1;
+        }
+
+        .reviewer-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .reviewer-role {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .review-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .review-stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .review-star {
+            color: #ffc107;
+            font-size: 16px;
+        }
+
+        .review-date {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .show-more-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .show-more-link:hover {
+            text-decoration: underline;
+        }
+
+        .show-all-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .show-all-btn {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            color: #666;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .show-all-btn:hover {
+            background: #f8f9fa;
+            border-color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .rating-section {
+                flex-direction: column;
+                gap: 40px;
+                align-items: center;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .rating-section {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 28px;
+            }
+            
+            .rating-number {
+                font-size: 48px;
+            }
+            
+            .metric-value {
+                font-size: 28px;
+            }
+            
+            .avatars-row {
+                gap: 4px;
+            }
+            
+            .avatar-small {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="avatars-row">
+                <img src="img/Reviews.png" alt="User" style="width: 650px; height: 150px; object-fit: cover;">
+
+                
+            </div>
+            <h1 class="header-title">Reviews and Ratings</h1>
+            <p class="header-subtitle">Why students love learning with tutors they found on  XcelProf</p>
+        </div>
+
+        <!-- Rating Overview Section -->
+        <div class="rating-section">
+            <div class="overall-rating">
+                <div class="rating-number">4.9</div>
+                <div class="stars-display">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <div class="rating-description">Overall rating of<br> XcelProf tutors</div>
+                <a href="#" class="view-detailed-link">View detailed ratings</a>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Expertise</div>
+                    <div class="metric-icon">😊</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Engagement</div>
+                    <div class="metric-icon">💻</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Reliability</div>
+                    <div class="metric-icon">📶</div>
+                </div>
+                <!-- <div class="metric-item">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Results</div>
+                    <div class="metric-icon">🎯</div>
+                </div> -->
+                <div class="metric-item">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Value</div>
+                    <div class="metric-icon">💰</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="reviews-container">
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Calvin Walsh" class="reviewer-avatar">
+
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Calvin Walsh</div>
+                            <div class="reviewer-role">Parent</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">about 2 months ago</div>
+                    </div>
+                    <div class="review-text">
+                        My daughter needed help with English writing and comprehension. We found a great tutor in 15 minutes on  XcelProf. The app makes everything so easy and we already seen a big improvement.
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User 2" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Madison Liu</div>
+                            <div class="reviewer-role">Student</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">2 months ago</div>
+                    </div>
+                    <div class="review-text">
+                        Finding a math tutor for my daughter was easy on  XcelProf. We were able to see a list of available tutor after selecting the subject. After regular lessons her confidence in math has improved noticeably.
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User 3" class="reviewer-avatar">
+
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Jack Morrison</div>
+                            <div class="reviewer-role">Parent</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">3 months ago</div>
+                    </div>
+                    <div class="review-text">
+                        It was hard to manage my hectic schedule as a college student and how  XcelProf helps me stay consistent with my online lessons. The app sends a reminder of every lesson helping me stay on track. My tutor is extremely...
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/66.jpg" alt="User 4" class="reviewer-avatar">
+
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Kris Bennett</div>
+                            <div class="reviewer-role">Student Parent</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">3 months ago</div>
+                    </div>
+                    <div class="review-text">
+                         XcelProf was very useful in finding a good English tutor for my 10 year old son. The first lesson was booked within one day and the lesson scheduling is very flexible which helped my son improve his writing skills significantly.
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/21.jpg" alt="User 5" class="reviewer-avatar">
+
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Amanda Collins</div>
+                            <div class="reviewer-role">Advocate</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">4 months ago</div>
+                    </div>
+                    <div class="review-text">
+                        Finding a math tutor on  XcelProf was really fast and easy. I just searched, used some filters, and looked and all! The app makes it easy to compare tutors and setting up regular lesson appointments. All my family strongly recommend...
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/10.jpg" alt="User 6" class="reviewer-avatar">
+
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Eva Goldberg</div>
+                            <div class="reviewer-role">Student Parent</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">4 months ago</div>
+                    </div>
+                    <div class="review-text">
+                        We were looking for a math tutor who could also help with SAT prep, and  XcelProf helped us in it. The app makes it easy to compare tutors and setting up regular lesson appointments. Highly recommend  XcelProf for finding trusted tutors.
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+
+                <!-- Review 7 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User 7" class="reviewer-avatar">
+
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Emily Foster</div>
+                            <div class="reviewer-role">Student</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">5 months ago</div>
+                    </div>
+                    <div class="review-text">
+                        As a working parent, I appreciate how easy it is to schedule and reschedule lessons on the  XcelProf app. My son's guitar tutor is fantastic and always available for quick chat through the app.
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+
+                <!-- Review 8 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/15.jpg" alt="User 8" class="reviewer-avatar">
+
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Drue Hayes</div>
+                            <div class="reviewer-role">Assistant Programme</div>
+                        </div>
+                    </div>
+                    <div class="review-rating-row">
+                        <div class="review-stars">
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                            <span class="review-star">★</span>
+                        </div>
+                        <div class="review-date">5 months ago</div>
+                    </div>
+                    <div class="review-text">
+                        The thing I appreciate the most is how quick and transparent everything was. I was looking for an expert tutor to get some help in music theory and I found a very competent tutor within minutes on  XcelProf. The best part is that I got first...
+                    </div>
+                    <a href="#" class="show-more-link" onclick="toggleReview(event)">Show more ></a>
+                </div>
+            </div>
+
+            <div class="show-all-section">
+                <button class="show-all-btn" onclick="showAllReviews()">Show all reviews</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleReview(event) {
+            event.preventDefault();
+            const link = event.target;
+            const reviewText = link.previousElementSibling;
+            
+            if (link.textContent === 'Show more >') {
+                // Show full text - you can add more content here
+                link.textContent = 'Show less <';
+            } else {
+                link.textContent = 'Show more >';
+            }
+        }
+
+        function showAllReviews() {
+            alert('Loading more reviews...');
+        }
+
+        // Add hover effects to review cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            reviewCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+
+        // Smooth scroll for view detailed ratings link
+        document.querySelector('.view-detailed-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.reviews-container').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
