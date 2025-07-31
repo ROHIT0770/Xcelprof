@@ -1,4 +1,4 @@
-  =>  Template Name    : XcelProf - Online Education Website Template
+  =>  Template Name    : XcelProf  
 
   =>  Template Link    : https://htmlcodex.com/online-education-website-template
 

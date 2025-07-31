@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>XcelProf - Online Education Website</title>
+    <title>XcelProf</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/logo-icon.png">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -34,7 +34,7 @@
             <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center text-white">
 
-                    <small class="px-3">|</small>
+                    <small class="px-3"></small>
                     <small><i class="fa fa-envelope mr-2"></i>connect@xcelprof.com</small>
                 </div>
             </div>
@@ -474,27 +474,31 @@
                             <h1 class="display-4">Send Us A Message</h1>
                         </div>
                         <div class="contact-form">
-                            <form>
+                            <form action="https://formsubmit.co/connect@xcelprof.com" method="POST">
+                                <!-- Anti-spam field (hidden from users) -->
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="hidden" name="_subject" value="New Contact Form Submission!">
                                 <div class="row">
                                     <div class="col-6 form-group">
-                                        <input type="text"
+                                        <input type="text" name="name"
                                             class="form-control border-top-0 border-right-0 border-left-0 p-0"
-                                            placeholder="Your Name" required="required">
+                                            placeholder="Your Name" required>
                                     </div>
                                     <div class="col-6 form-group">
-                                        <input type="email"
+                                        <input type="email" name="email"
                                             class="form-control border-top-0 border-right-0 border-left-0 p-0"
-                                            placeholder="Your Email" required="required">
+                                            placeholder="Your Email" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text"
+                                    <input type="text" name="subject"
                                         class="form-control border-top-0 border-right-0 border-left-0 p-0"
-                                        placeholder="Subject" required="required">
+                                        placeholder="Subject" required>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control border-top-0 border-right-0 border-left-0 p-0"
-                                        rows="5" placeholder="Message" required="required"></textarea>
+                                    <textarea name="message"
+                                        class="form-control border-top-0 border-right-0 border-left-0 p-0" rows="5"
+                                        placeholder="Message" required></textarea>
                                 </div>
                                 <div>
                                     <button class="btn btn-primary py-3 px-5" type="submit">Send Message</button>
@@ -564,19 +568,7 @@
                         <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>SEO</a>
                     </div>
                 </div> -->
-                    <div class="col-md-4 mb-5">
-                        <h3 class="text-white mb-4">Quick Links</h3>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Privacy
-                                Policy</a>
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Terms &
-                                Condition</a>
 
-                            <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help &
-                                Support</a>
-                            <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
